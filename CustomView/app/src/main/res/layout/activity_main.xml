@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ml_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layoutDescription="@xml/activity_main_scene"
+    tools:context=".MainActivity">
+
+    <com.chow.customview.DrawingView
+        android:id="@+id/v_drawing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_setting_spacing"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_change_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/v_first_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_setting_spacing" />
+
+            <View
+                android:id="@+id/v_first_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/btn_change_color"
+                app:layout_constraintEnd_toStartOf="@id/btn_mode"
+                app:layout_constraintStart_toEndOf="@id/btn_change_color"
+                app:layout_constraintTop_toTopOf="@id/btn_change_color" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_mode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey"
+                android:text="pen"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/v_second_line"
+                app:layout_constraintStart_toEndOf="@id/v_first_line"
+                app:layout_constraintTop_toTopOf="@id/btn_change_color" />
+
+            <View
+                android:id="@+id/v_second_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/btn_change_color"
+                app:layout_constraintEnd_toStartOf="@id/btn_undo"
+                app:layout_constraintStart_toEndOf="@id/btn_mode"
+                app:layout_constraintTop_toTopOf="@id/btn_change_color" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_undo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey"
+                android:text="undo"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/v_third_line"
+                app:layout_constraintStart_toEndOf="@id/v_second_line"
+                app:layout_constraintTop_toTopOf="@id/btn_change_color" />
+
+            <View
+                android:id="@+id/v_third_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/btn_change_color"
+                app:layout_constraintEnd_toStartOf="@id/btn_clear"
+                app:layout_constraintStart_toEndOf="@id/btn_undo"
+                app:layout_constraintTop_toTopOf="@id/btn_change_color" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_clear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey"
+                android:text="clear all"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/v_third_line"
+                app:layout_constraintTop_toTopOf="@id/btn_change_color" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.chow.customview.GuessView
+            android:id="@+id/v_guess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_bg_black_stroke" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/white_bg_black_stroke"
+        android:src="@drawable/ic_arrow_down"
+        app:layout_constraintBottom_toTopOf="@id/ll_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
