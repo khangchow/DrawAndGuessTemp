@@ -1,8 +1,6 @@
 package com.chow.customview
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.chow.customview.databinding.ActivityMainBinding
@@ -17,6 +15,7 @@ class MainActivity : AppCompatActivity(), OnDrawListener {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.apply {
+            vDrawing.setDrawingImage(data[0])
             btnChangeColor.apply {
                 setOnClickListener {
                     ColorSelectorDialog(onColorSelected = {

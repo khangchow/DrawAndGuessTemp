@@ -2,7 +2,6 @@ package com.chow.customview
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
@@ -29,7 +28,12 @@ class DrawingView @JvmOverloads constructor(
     private var count = 0
     private lateinit var lastPoint: Point
     private var isEraser = false
-    private var lastLinePosition = 0
+    private lateinit var image: List<Line>
+
+    fun setDrawingImage(image: List<Line>) {
+        this.image = image
+        invalidate()
+    }
 
     init {
         setBackgroundResource(R.color.white)
@@ -53,6 +57,7 @@ class DrawingView @JvmOverloads constructor(
                 lastPoint = Point(event.x, event.y)
                 return true
             }
+
             MotionEvent.ACTION_MOVE -> {
                 if (isEraser && lines.size == 0) return true
                 addNewLine(
@@ -66,10 +71,14 @@ class DrawingView @JvmOverloads constructor(
                 listener?.onDraw(lines.lastOrNull())
                 return true
             }
+
             MotionEvent.ACTION_UP -> {
                 if (count > 0) {
                     lineCounts.add(count)
                     count = 0
+                }
+                lines.forEach {
+                    Log.d("CHOTAOTEST", "onTouchEvent: $it")
                 }
                 return true
             }
@@ -79,6 +88,11 @@ class DrawingView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        image.forEach {
+            canvas.drawLine(it.start.x, it.start.y, it.end.x, it.end.y, paint.apply {
+                color = if (it.isFromEraser) bgColor else it.color
+            })
+        }
         lines.forEach {
             canvas.drawLine(it.start.x, it.start.y, it.end.x, it.end.y, paint.apply {
                 color = if (it.isFromEraser) bgColor else it.color
